@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dataset Passport</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+  <div class="container">
+    <section class="hero">
+      <div class="topbar reveal">
+        <div class="brand">
+          <div class="brand-mark pulse"></div>
+          <div class="brand-copy">
+            <h1>Dataset Passport</h1>
+            <p>Independent dataset provenance app powered by Shelby storage</p>
+          </div>
+        </div>
+
+        <div class="pill-note">
+          <span class="dot"></span>
+          Not affiliated with Shelby
+        </div>
+      </div>
+
+      <div class="hero-panel">
+        <div class="hero-main glass reveal">
+          <div class="pill-note">
+            <span class="dot"></span>
+            Dataset identity, integrity, and proof
+          </div>
+
+          <h2>Turn every dataset into a verifiable credential.</h2>
+
+          <p>
+            Register datasets, generate a fingerprint, issue a passport, and
+            give builders a clean way to prove what they uploaded and when.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#upload-section">Create Passport</a>
+            <a class="btn btn-secondary" href="/datasets">Open Registry</a>
+          </div>
+        </div>
+
+        <div class="hero-side glass reveal floaty">
+          <div class="status-card">
+            <h3>Why this exists</h3>
+            <div class="live-line">
+              Dataset Passport is its own product. Shelby is used as the storage layer and trust backend.
+            </div>
+          </div>
+
+          <div class="status-grid">
+            <div class="metric">
+              <div class="metric-label">Credential</div>
+              <div class="metric-value">Passport</div>
+              <div class="metric-sub">Shareable dataset proof page</div>
+            </div>
+
+            <div class="metric">
+              <div class="metric-label">Integrity</div>
+              <div class="metric-value">SHA-256</div>
+              <div class="metric-sub">Tamper-evident fingerprinting</div>
+            </div>
+
+            <div class="metric">
+              <div class="metric-label">Storage</div>
+              <div class="metric-value">Shelby</div>
+              <div class="metric-sub">Powered by verifiable object storage</div>
+            </div>
+
+            <div class="metric">
+              <div class="metric-label">Output</div>
+              <div class="metric-value">Registry</div>
+              <div class="metric-sub">Live archive of issued datasets</div>
+            </div>
+          </div>
+
+          <div class="status-card">
+            <h3>Proof flow</h3>
+            <div class="live-line">
+              file → fingerprint → shelby blob → dataset passport
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-grid">
+      <div id="upload-section" class="card glass reveal">
+        <div class="section-head">
+          <div>
+            <h3>Register Dataset</h3>
+            <p>Create a passport for a new dataset version.</p>
+          </div>
+        </div>
+
+        <form id="uploadForm" enctype="multipart/form-data">
+          <div class="field">
+            <label for="datasetName">Dataset Name</label>
+            <input id="datasetName" name="datasetName" placeholder="Example: Robot Navigation Dataset" required>
+          </div>
+
+          <div class="field">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" placeholder="What is this dataset for"></textarea>
+          </div>
+
+          <div class="field">
+            <label for="datasetFile">Dataset File</label>
+            <input class="file-input" id="datasetFile" type="file" name="file" required>
+          </div>
+
+          <button class="btn btn-primary" type="submit">Issue Passport</button>
+        </form>
+
+        <div class="result-shell">
+          <div class="result-head">Upload Result</div>
+          <pre id="uploadResult">Waiting for a dataset upload.</pre>
+        </div>
+      </div>
+
+      <div class="card glass reveal">
+        <div class="section-head">
+          <div>
+            <h3>Verify Integrity</h3>
+            <p>Check whether a file matches a registered dataset.</p>
+          </div>
+        </div>
+
+        <form id="verifyForm" enctype="multipart/form-data">
+          <div class="field">
+            <label for="verifyFile">Select File</label>
+            <input class="file-input" id="verifyFile" type="file" required>
+          </div>
+
+          <button class="btn btn-secondary" type="submit">Verify Dataset</button>
+        </form>
+
+        <div class="result-shell">
+          <div class="result-head">Verification Result</div>
+          <pre id="verifyResult">Waiting for verification input.</pre>
+        </div>
+      </div>
+    </section>
+
+    <p class="footer-note reveal">
+      Dataset Passport is an independent interface for dataset provenance. Shelby is used as the storage and verification layer underneath.
+    </p>
+  </div>
+
+  <script>
+    const uploadForm = document.getElementById("uploadForm");
+    const uploadResult = document.getElementById("uploadResult");
+
+    uploadForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(uploadForm);
+      uploadResult.textContent = "Uploading dataset and issuing passport...";
+
+      try {
+        const response = await fetch("/upload", {
+          method: "POST",
+          body: formData
+        });
+
+        const data = await response.json();
+
+        if (data.passportUrl) {
+          uploadResult.innerHTML = `
+Dataset uploaded successfully
+
+Passport URL:
+<a class="inline-link" href="${data.passportUrl}" target="_blank">${data.passportUrl}</a>
+
+Dataset ID:
+${data.datasetId}
+          `.trim();
+        } else {
+          uploadResult.textContent = JSON.stringify(data, null, 2);
+        }
+      } catch (err) {
+        uploadResult.textContent = "Upload failed";
+      }
+    });
+
+    <div class="passport-row">
+<strong>Owner Wallet</strong>
+<span>${metadata.ownerWallet}</span>
+</div>
+
+    const verifyForm = document.getElementById("verifyForm");
+    const verifyResult = document.getElementById("verifyResult");
+
+    verifyForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const file = document.getElementById("verifyFile").files[0];
+      if (!file) {
+        verifyResult.textContent = "Please choose a file first.";
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("file", file);
+
+      verifyResult.textContent = "Checking dataset integrity...";
+
+      try {
+        const response = await fetch("/verify", {
+          method: "POST",
+          body: formData
+        });
+
+        const data = await response.json();
+
+        if (data.verified) {
+          verifyResult.innerHTML = `
+Verified: true
+
+Dataset Name:
+${data.datasetName}
+
+Dataset ID:
+${data.datasetId}
+
+Passport URL:
+<a class="inline-link" href="${data.passportUrl}" target="_blank">${data.passportUrl}</a>
+          `.trim();
+        } else {
+          verifyResult.textContent = JSON.stringify(data, null, 2);
+        }
+      } catch (err) {
+        verifyResult.textContent = "Verification failed";
+      }
+    });
+
+    const revealItems = document.querySelectorAll(".reveal");
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealItems.forEach((item) => revealObserver.observe(item));
+
+    document.addEventListener("mousemove", (e) => {
+      const cards = document.querySelectorAll(".glass");
+      const x = e.clientX / window.innerWidth;
+      const y = e.clientY / window.innerHeight;
+
+      cards.forEach((card) => {
+        const rotateY = (x - 0.5) * 2.2;
+        const rotateX = (0.5 - y) * 2.2;
+        card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      });
+    });
+
+    document.addEventListener("mouseleave", () => {
+      document.querySelectorAll(".glass").forEach((card) => {
+        card.style.transform = "perspective(1200px) rotateX(0deg) rotateY(0deg)";
+      });
+    });
+  </script>
+</body>
+</html>

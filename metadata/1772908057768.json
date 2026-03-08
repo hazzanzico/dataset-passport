@@ -1,0 +1,11 @@
+{
+  "id": "1772908057768",
+  "datasetName": "Test",
+  "description": "This is a test",
+  "originalName": "0571b61f-b413-4e0a-bae0-f50bf3820256.png",
+  "storedFileName": "1772908057668-0571b61f-b413-4e0a-bae0-f50bf3820256.png",
+  "blobName": "files/1772908057768-0571b61f-b413-4e0a-bae0-f50bf3820256.png",
+  "hash": "ca2c5deb38f00f2f5a8f02b024056cbc32ee47654da17d73b608670e2bb560a3",
+  "uploadedAt": "2026-03-07T18:28:06.433Z",
+  "shelbyOutput": "\n🚀  Upload Summary\n────────────────────────────────────────────\n📦  File:        C:\\Users\\hazza\\OneDrive\\Desktop\\verifiable-content-archive\\uploads\\1772908057668-0571b61f-b413-4e0a-bae0-f50bf3820256.png\n📁  Blob Name:   files/1772908057768-0571b61f-b413-4e0a-bae0-f50bf3820256.png\n\n🧮  Filelist created (1 entry)\n⏱️  Took: 0.00204s\n⚙️  Flag: --assume-yes (auto-confirmed)\n\n🕒  Expires:  Mar 8, 2026, 7:27:51 PM\n\n🌐  Aptos Explorer:\n   https://explorer.aptoslabs.com/txn/0xd34f8fe7bde4b0c3d88b331ae5629794beff40673b35f88989b9660c921208f3?network=testnet\n\n🗂️  Shelby Explorer:\n   https://explorer.shelby.xyz/testnet/account/0x6ee69b0652fee874828f1e035fa20f1f88fd8c616a0f1468eb56af5b22ddee98\n\n────────────────────────────────────────────\n✨  Done!\n\n"
+}

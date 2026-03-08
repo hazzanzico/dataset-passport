@@ -1,0 +1,9 @@
+{
+  "id": "1772852184316",
+  "originalName": "test.txt",
+  "storedFileName": "1772852115242-test.txt",
+  "blobName": "files/1772852115424-test.txt",
+  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "uploadedAt": "2026-03-07T02:56:24.316Z",
+  "shelbyOutput": "\n🚀  Upload Summary\n────────────────────────────────────────────\n📦  File:        C:\\Users\\hazza\\OneDrive\\Desktop\\verifiable-content-archive\\uploads\\1772852115242-test.txt\n📁  Blob Name:   files/1772852115424-test.txt\n\n🧮  Filelist created (1 entry)\n⏱️  Took: 0.01178s\n⚙️  Flag: --assume-yes (auto-confirmed)\n\n🕒  Expires:  Mar 8, 2026, 3:55:58 AM\n\n🌐  Aptos Explorer:\n   https://explorer.aptoslabs.com/txn/0x5c1267dcfa4f632544819ac96f3e2aad6c8c71a98886e6fdaf02d07d1b16d259?network=testnet\n\n🗂️  Shelby Explorer:\n   https://explorer.shelby.xyz/testnet/account/0x6ee69b0652fee874828f1e035fa20f1f88fd8c616a0f1468eb56af5b22ddee98\n\n────────────────────────────────────────────\n✨  Done!\n\n"
+}
